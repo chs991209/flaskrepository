@@ -6,6 +6,11 @@ from models import db
 app = Flask(__name__)
 
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+
 @app.route('/')
 def hello():
     return render_template('hello.html')
