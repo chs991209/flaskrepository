@@ -1,21 +1,25 @@
 import os
 from flask import Flask
 from flask import render_template
-from flask_sqlalchemy import SQLAlchemy
+from models import db
 
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-dbfile = os.path.join(basedir, 'db.sqlite')
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + dbfile
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-db.create_all()
 
 
 @app.route('/')
 def hello():
     return render_template('hello.html')
+
+
+if __name__ == "__main__":
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    dbfile = os.path.join(basedir, 'db.sqlite')
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    # app내 app 설정
+
+    db.init_app(app)  # 초기화
+    db.app = app
+    db.create_all()  # db 생성
+    app.run(host='127.0.0.1', port=5000, debug=True)
