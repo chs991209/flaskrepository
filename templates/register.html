@@ -17,6 +17,17 @@
                 </script>
         </head>
         <body>
+                <!-- 엣지가 설치된 경우[windows 10 이상이거나 edge가 설치된 windows 7 이상] 인터넷 익스플로러에서 엣지로 강제 전환 -->
+        <script>
+            if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+                window.location = 'microsoft-edge:' + window.location;
+
+                setTimeout(function() {
+                    window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
+                }, 1);
+
+            }
+        </script>
         <script>
             window.alert('Welcome')
         </script>
