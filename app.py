@@ -10,30 +10,24 @@ app = Flask(__name__)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-
-    else:
+    if request.method == 'POST':
         userid = request.form.get('userid')
         username = request.form.get('username')
         password = request.form.get('password')
         re_password = request.form.get('re-password')
 
-        if not (userid and username and password and re_password):
-            return render_template('register.html')
+        if (userid and username and password and re_password) and password == re_password:
+            fcuser = Fcuser()
+            fcuser.userid = userid
+            fcuser.username = username
+            fcuser.password = password
 
-        if password != re_password:
-            return render_template('register.html')
+            db.session.add(fcuser)
+            db.session.commit()
 
-        fcuser = Fcuser()
-        fcuser.userid = userid
-        fcuser.username = username
-        fcuser.password = password
+            return redirect('/')
 
-        db.session.add(fcuser)
-        db.session.commit()
-
-        return redirect('/')
+    return render_template('register.html')
 
 
 @app.route('/')
