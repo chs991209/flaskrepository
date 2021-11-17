@@ -1,0 +1,61 @@
+    <html>
+        <head>
+            <meta charset='utf-8' />
+            <meta name="viewport" content="width=device=width, initial-scale=1, shrink=to=fit=no" />
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+                  integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+            <!-- Option 2: Separate Popper and Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+                </script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+                </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+                    integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+                </script>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/trialstyle.css')}}">
+        </head>
+        <body>
+                <!-- 엣지가 설치된 경우[windows 10 이상이거나 edge가 설치된 windows 7 이상] 인터넷 익스플로러에서 엣지로 강제 전환 -->
+        <script>
+            if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+                window.location = 'microsoft-edge:' + window.location;
+
+                setTimeout(function() {
+                    window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
+                }, 1);
+
+            }
+        </script>
+        <script>
+            window.alert('Welcome')
+        </script>
+        <div class="container">
+            <div class="row mt-5">
+                <h1>Sign in</h1>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <form method="POST" >
+                        {{ form.csrf_token }}
+                    <div class="form-group">
+<!--                        <label for="userid">아이디</label>-->
+<!--                        <input type="text" class="form-control" id="userid" placeholder="사용자 ID" name="userid" style="background-color: #9af9e7"/>-->
+                            {{ form.userid.label("사용자 ID") }}
+                            {{ form.userid(class="form-control", placeholder="이메일", style="background-color: #9af9e7") }}
+                      </div>
+                      <div class="form-group">
+<!--                        <label for="password">비밀번호</label>-->
+<!--                        <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password" style="background-color: #9af9e7"/>-->
+                            {{ form.password.label("비밀번호") }}
+                            {{ form.password(class="form-control", placeholder="비밀번호", style="background-color: #9af9e7") }}
+                      </div>
+                      <button type="submit" class="btn btn-primary">가입 완료</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
