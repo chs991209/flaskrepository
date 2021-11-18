@@ -3,10 +3,10 @@ import os
 from flask import Flask
 from flask import redirect
 from flask import render_template
+from flask import session
 from flask_wtf.csrf import CSRFProtect
 
-from forms import LoginForm
-from forms import RegisterForm
+from forms import LoginForm, RegisterForm
 from models import db, Fcuser
 
 app = Flask(__name__)
@@ -16,6 +16,7 @@ app = Flask(__name__)
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        session['userid'] = form.data.get('userid')
         return redirect('/')
     return render_template('login.html', form=form)
 
@@ -40,7 +41,8 @@ def register():
 
 @app.route('/')
 def hello():
-    return render_template('hello.html')
+    userid = session.get('userid', None)
+    return render_template('hello.html', userid=userid)
 
 
 if __name__ == "__main__":
