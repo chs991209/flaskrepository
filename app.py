@@ -12,12 +12,19 @@ from models import db, Fcuser
 app = Flask(__name__)
 
 
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('userid', None)
+    return redirect('/')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         session['userid'] = form.data.get('userid')
         return redirect('/')
+
     return render_template('login.html', form=form)
 
 

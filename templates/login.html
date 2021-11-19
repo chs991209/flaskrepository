@@ -50,8 +50,11 @@
     <!--                        <label for="password">비밀번호</label>-->
     <!--                        <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password" style="background-color: #9af9e7"/>-->
                                 {{ form.password.label("비밀번호") }}
+                                {% if form.password.errors %}
+                                {{ form.password.errors.0 }}
+                                {% endif %}
                                 {{ form.password(class="form-control", placeholder="비밀번호", style="background-color: #9af9e7") }}
-                          </div>
+                           </div>
                       <button type="submit" class="btn btn-primary">가입 완료</button>
                     </form>
                 </div>
